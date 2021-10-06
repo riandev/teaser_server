@@ -7,7 +7,7 @@ const _ = require("lodash");
 const path = require("path");
 
 const app = express();
-app.use(express.static("../sheikh_100s_client/build"));
+app.use(express.static("../teaser_client/build"));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false, limit: "5000mb" }));
 app.use(bodyParser.json({ limit: "5000mb" }));
@@ -15,9 +15,9 @@ const port = 5030;
 
 const MongoClient = require("mongodb").MongoClient;
 // const MongoClient = require("mongodb").MongoClient;
-// const uri = "mongodb://127.0.0.1:27017/jti_teaser";
-const uri =
-  "mongodb+srv://aktcl:01939773554op5t@cluster0.9akoo.mongodb.net/jti_teaser?retryWrites=true&w=majority";
+const uri = "mongodb://127.0.0.1:27017/jti_teaser";
+// const uri =
+//   "mongodb+srv://aktcl:01939773554op5t@cluster0.9akoo.mongodb.net/jti_teaser?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -1682,11 +1682,9 @@ client.connect((err) => {
         res.send(results);
       });
   });
-  // app.get("*", (req, res) => {
-  //   res.sendFile(
-  //     path.join(__dirname, "../sheikh_100s_client/build", "index.html")
-  //   );
-  // });
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../teaser_client/build", "index.html"));
+  });
 });
 
 app.get("/", (req, res) => {
